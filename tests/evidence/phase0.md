@@ -40,6 +40,11 @@ GitHub run `38442024172` failed before build: `actions/setup-java` rejected
 uses `scripts/mcne/install_jdk.py` and a locked Temurin archive URL/SHA256.
 The installer was executed successfully on macOS/aarch64 and confirmed the
 exact vendor/version. Linux CI must execute the correction before PASS.
+Run `38442474306` passed JDK installation, pin checks and source patching but
+failed feature-patch application because repository-local Git identity did
+not propagate into paperweight's generated nested repository. The corrected
+workflow sets Git identity globally on the disposable GitHub runner. No
+developer machine's global Git configuration is changed.
 
 ## Independent startup and semantic smoke
 
