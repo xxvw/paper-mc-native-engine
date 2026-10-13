@@ -14,10 +14,11 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '25.0.4.1+1'
+      - name: Install checksum-locked Temurin JDK
+        run: |
+          JDK_HOME=$(python3 scripts/mcne/install_jdk.py --target linux-x86_64)
+          echo "JAVA_HOME=$JDK_HOME" >> "$GITHUB_ENV"
+          echo "$JDK_HOME/bin" >> "$GITHUB_PATH"
       - name: Verify baseline and publication exclusions
         run: |
           python3 scripts/mcne/verify_upstream.py

@@ -34,6 +34,14 @@ Local logs are retained under `.local/evidence/`; worlds and binaries are not
 published. No benchmark, performance result, full differential result, native
 binary, client branding verification or release is claimed.
 
+## CI setup correction
+
+GitHub run `38442024172` failed before build: `actions/setup-java` rejected
+`25.0.4.1+1` as invalid SemVer. The version was not relaxed. The corrected CI
+uses `scripts/mcne/install_jdk.py` and a locked Temurin archive URL/SHA256.
+The installer was executed successfully on macOS/aarch64 and confirmed the
+exact vendor/version. Linux CI must execute the correction before PASS.
+
 ## Pending gates
 
 Independent server startup, persisted semantic smoke comparison, full Phase 3
