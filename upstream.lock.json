@@ -59,7 +59,7 @@
     "downloadChecksums": "PASS",
     "sourceCommit": "PASS",
     "build": "PASS",
-    "launch": "PENDING",
-    "semanticSmoke": "PENDING"
+    "launch": "PASS",
+    "semanticSmoke": "PASS"
   }
 }

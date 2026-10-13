@@ -7,7 +7,7 @@ Repository: https://github.com/xxvw/paper-mc-native-engine
 
 ## Current state
 
-Phase 0 is in progress. The server source and generation logic are unchanged.
+Phase 0 local acceptance passed. The server source and generation logic are unchanged.
 There is no working native engine, custom branding or `/mcne` command yet.
 `JAVA_BASELINE` is the only runnable path. No performance improvement is claimed.
 

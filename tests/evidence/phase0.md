@@ -1,7 +1,6 @@
 # Phase 0 execution evidence
 
-Status: IN PROGRESS. No-op fork build passed; launch and semantic equivalence
-must pass before proceeding to Phase 1. Tracking issue: #1.
+Status: PASS for local Phase 0 acceptance. Tracking issue: #1.
 
 ## Verified baseline
 
@@ -42,9 +41,40 @@ uses `scripts/mcne/install_jdk.py` and a locked Temurin archive URL/SHA256.
 The installer was executed successfully on macOS/aarch64 and confirmed the
 exact vendor/version. Linux CI must execute the correction before PASS.
 
-## Pending gates
+## Independent startup and semantic smoke
 
-Independent server startup, persisted semantic smoke comparison, full Phase 3
-fixture suite, client F3 integration, native fallback, all six platform runtime
+Command (paths below refer to managed, ignored development downloads):
+
+```sh
+.tools/compat-venv/bin/python compat-tests/smoke.py \
+  --java .tools/jdk-25.0.4.1+1/Contents/Home/bin/java \
+  --baseline .tools/downloads/paper-26.3-181.jar \
+  --fork paper-server/build/libs/paper-paperclip-26.3.local-SNAPSHOT.jar \
+  --accept-eula
+```
+
+Run `phase0-20_rm2am`: PASS, 18/18 persisted FULL chunks matched. Separate
+baseline/fork JVMs started successfully and exited cleanly after save/flush.
+Seed 0; overworld/nether/end; coordinates `(0,0)`, `(-1,-1)`, `(1,-1)`,
+`(31,31)`, `(32,32)`, `(-32,-32)`. Canonical hashes and artifact checksums are
+in `phase0-smoke.json`. `compat-tests/test_snapshot.py`: 4/4 tests passed.
+
+The exact pinned Paper uses `world/dimensions/minecraft/<dimension>/region`,
+not older Paper world layouts. Its verified gamerule names are
+`random_tick_speed`, `spawn_mobs` and `advance_time`. Gameplay is frozen after
+startup; worker and I/O counts are both one to constrain generation ordering.
+This smoke is not a representative workload/performance claim.
+
+Earlier diagnostic runs were retained: one used obsolete gamerule names and
+was interrupted; one reader assumed the old storage layout; default-worker
+comparisons showed terrain/light/tick differences; sending freeze before
+startup completed caused an upstream command-source NPE. These runs did not
+pass. The harness now verifies feedback and source-confirmed configuration,
+freezes only after startup, and does not discard terrain/light/tick mismatches.
+Only `LastUpdate` and `InhabitedTime` are excluded as runtime counters.
+
+## Remaining gates
+
+Full Phase 3 fixture suite, client F3 integration, native fallback, all six platform runtime
 tests, performance qualification and distribution/license review remain open.
 The original requirement documents remain local and excluded from Git.

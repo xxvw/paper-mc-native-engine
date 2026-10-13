@@ -24,6 +24,11 @@ jobs:
           python3 scripts/mcne/verify_upstream.py
           python3 scripts/mcne/check_publication.py
           python3 -m unittest discover -s tests -p 'test_baseline.py' -v
+      - name: Verify snapshot canonicalization
+        run: |
+          python3 -m venv .tools/compat-venv
+          .tools/compat-venv/bin/python -m pip install -r compat-tests/requirements.txt
+          .tools/compat-venv/bin/python -m unittest discover -s compat-tests -p 'test_*.py' -v
       - name: Discover pinned upstream tasks
         run: ./gradlew tasks --all
       - name: Configure patch Git identity
