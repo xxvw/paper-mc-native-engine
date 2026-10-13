@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MCNE benchmark result",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "runId",
+    "mode",
+    "status",
+    "startedAtUtc",
+    "environment",
+    "counts",
+    "durationMs",
+    "metrics"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "runId": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]{1,80}$"
+    },
+    "mode": {
+      "enum": [
+        "generate",
+        "reload",
+        "tp",
+        "compare-generate",
+        "compare-reload"
+      ]
+    },
+    "status": {
+      "enum": [
+        "SUCCESS",
+        "FAILED",
+        "CANCELLED",
+        "INCONCLUSIVE"
+      ]
+    },
+    "startedAtUtc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completedAtUtc": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "environment": {
+      "type": "object",
+      "required": [
+        "minecraftVersion",
+        "paperBuild",
+        "paperCommit",
+        "javaVersion",
+        "os",
+        "arch",
+        "engineMode"
+      ],
+      "properties": {
+        "minecraftVersion": {
+          "type": "string"
+        },
+        "paperBuild": {
+          "type": "string"
+        },
+        "paperCommit": {
+          "type": "string"
+        },
+        "javaVersion": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "arch": {
+          "type": "string"
+        },
+        "engineMode": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "counts": {
+      "type": "object",
+      "required": [
+        "requested",
+        "generated",
+        "reloaded",
+        "failed"
+      ],
+      "properties": {
+        "requested": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "generated": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reloaded": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "durationMs": {
+      "type": "number",
+      "minimum": 0
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "tps1m": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "msptP95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "tpLatencyMs": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "areaReadyMs": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "unavailableMetrics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

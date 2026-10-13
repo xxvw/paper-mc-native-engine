@@ -1,0 +1,36 @@
+name: MCNE baseline checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '25.0.4.1+1'
+      - name: Verify baseline and publication exclusions
+        run: |
+          python3 scripts/mcne/verify_upstream.py
+          python3 scripts/mcne/check_publication.py
+          python3 -m unittest discover -s tests -p 'test_baseline.py' -v
+      - name: Discover pinned upstream tasks
+        run: ./gradlew tasks --all
+      - name: Configure patch Git identity
+        run: |
+          git config user.name 'MCNE CI'
+          git config user.email 'mcne-ci@users.noreply.github.com'
+      - name: Apply maintained patches
+        run: ./gradlew applyPatches
+      - name: Build unchanged fork
+        run: ./gradlew createPaperclipJar
+      # No upstream publishing, binary release or equivalence assertion here.

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Refuse publication of local requirements, including intermediate fork commits.
+set -eu
+python3 scripts/mcne/verify_upstream.py
+python3 scripts/mcne/check_publication.py

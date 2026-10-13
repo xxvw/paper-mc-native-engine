@@ -1,101 +1,61 @@
-Paper [![Version](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fartifactory.papermc.io%2Fartifactory%2Funiverse%2Fio%2Fpapermc%2Fpaper%2Fpaper-api%2Fmaven-metadata.xml&strategy=highestVersion&filter=26.3.*&label=version&color=%23344ceb
-)](https://papermc.io/downloads/paper)
-[![Paper Build Status](https://img.shields.io/github/actions/workflow/status/PaperMC/Paper/release-26.3.yaml?branch=main)](https://github.com/PaperMC/Paper/actions)
-[![Discord](https://img.shields.io/discord/289587909051416579.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/papermc)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/papermc?label=GitHub%20Sponsors)](https://github.com/sponsors/PaperMC)
-[![Open Collective](https://img.shields.io/opencollective/all/papermc?label=OpenCollective%20Sponsors)](https://opencollective.com/papermc)
-===========
+# paper-chunk-native-engine
 
-The most widely used, high-performance Minecraft server that aims to fix gameplay and mechanics inconsistencies.
+A minimal Paper fork for measured, opt-in C11/JNI chunk acceleration while
+preserving the generated-world semantics of the pinned, unmodified Paper.
 
+Repository: https://github.com/xxvw/paper-mc-native-engine
 
-**Support and Project Discussion:**
-- [Our forums](https://forums.papermc.io/) or [Discord](https://discord.gg/papermc)
+## Current state
 
-How To (Server Admins)
-------
-Paperclip is a jar file that you can download and run just like a normal jar file.
+Phase 0 is in progress. The server source and generation logic are unchanged.
+There is no working native engine, custom branding or `/mcne` command yet.
+`JAVA_BASELINE` is the only runnable path. No performance improvement is claimed.
 
-Download Paper from our [downloads page](https://papermc.io/downloads/paper).
+The immutable baseline is recorded in `upstream.lock.json`. The inherited
+Paper build scripts, wrapper, patch workflow and licenses are preserved.
+Local requirement documents under `docs/` are deliberately not published.
 
-Run the Paperclip jar directly from your server. Just like old times.
+## Reproduce the baseline build
 
-* Documentation on using Paper: [docs.papermc.io](https://docs.papermc.io)
-* For a sneak peek at upcoming features, [see here](https://github.com/PaperMC/Paper/projects)
+Install Eclipse Temurin **25.0.4.1+1** for your platform and set `JAVA_HOME`.
+Verify vendor/version with `"$JAVA_HOME/bin/java" -version`. Use the inherited
+Gradle wrapper; do not substitute a system Gradle or a different JDK.
 
-How To (Plugin Developers)
-------
-* See our API [here](paper-api)
-* See upcoming, pending, and recently added API [here](https://github.com/orgs/PaperMC/projects/2/views/4)
-* Paper API javadocs here: [papermc.io/javadocs](https://papermc.io/javadocs/)
-#### Repository (for paper-api)
-See [the docs](https://docs.papermc.io/paper/dev/project-setup/#adding-paper-as-a-dependency) for more details.
-##### Gradle
-```kotlin
-repositories {
-    maven {
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
-}
-
-dependencies {
-    compileOnly("io.papermc.paper:paper-api:26.3.build.+")
-}
-
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
-}
-```
-##### Maven
-
-```xml
-<repository>
-    <id>papermc</id>
-    <url>https://repo.papermc.io/repository/maven-public/</url>
-</repository>
+```sh
+git clone git@github.com:xxvw/paper-mc-native-engine.git
+cd paper-mc-native-engine
+git config core.hooksPath scripts/mcne
+python3 scripts/mcne/verify_upstream.py
+./gradlew tasks --all
+./gradlew applyPatches
+./gradlew createPaperclipJar
 ```
 
-```xml
-<dependency>
-    <groupId>io.papermc.paper</groupId>
-    <artifactId>paper-api</artifactId>
-    <version>[26.3.build,)</version>
-    <scope>provided</scope>
-</dependency>
+Output: `paper-server/build/libs/paper-paperclip-26.3.local-SNAPSHOT.jar`.
+Do not set the upstream `BUILD_NUMBER` environment variable for fork builds:
+the fork must not claim to be an official Paper build. Record the baseline
+build number separately from fork provenance.
+
+The download URLs/checksums in the lock describe the official untouched
+baseline and the development-host JDK archive. Verify downloads with:
+
+```sh
+python3 scripts/mcne/verify_upstream.py --baseline /path/to/paper.jar \
+  --jdk-archive /path/to/locked-macos-aarch64-jdk.tar.gz
 ```
 
-How To (Compiling Jar From Source)
-------
-To compile Paper, you need JDK 25 and an internet connection.
+For patch changes, follow the pinned `CONTRIBUTING.md`. Use the discovered
+`fixupSourcePatches`/`rebuildPatches` tasks; generated Minecraft sources are
+not maintained directly. CI never publishes to Paper's Fill or Maven servers.
 
-Clone this repo, run `./gradlew applyPatches`, then `./gradlew createPaperclipJar` from your terminal. You can find the compiled jar in the `paper-server/build/libs` directory.
+## Acceptance and distribution
 
-To get a full list of tasks, run `./gradlew tasks`.
+See `tests/phase0.md`, `tests/traceability.md` and `tests/evidence/` for actual
+commands, results and pending gates. All server tests use disposable managed
+directories and separate baseline/fork JVMs. Minecraft EULA acceptance is
+required before launching test servers.
 
-How To (Pull Request)
-------
-See [Contributing](CONTRIBUTING.md)
-
-Old Versions (1.21.3 and below)
-------
-For branches of versions 1.8-1.21.3, please see our [archive repository](https://github.com/PaperMC/Paper-archive).
-
-Support Us
-------
-First of all, thank you for considering helping out, we really appreciate that!
-
-PaperMC has various recurring expenses, mostly related to infrastructure. Paper uses [Open Collective](https://opencollective.com/) via the [Open Source Collective fiscal host](https://opencollective.com/opensource) to manage expenses. Open Collective allows us to be extremely transparent, so you can always see how your donations are used. You can read more about financially supporting PaperMC [on our website](https://papermc.io/sponsors).
-
-You can find our collective [here](https://opencollective.com/papermc), or you can donate via GitHub Sponsors [here](https://github.com/sponsors/PaperMC), which will also go towards the collective.
-
-Special Thanks To:
--------------
-
-[![CI powered by namespace badge](https://assets.papermc.io/sponsors/namespace-oss-badge.svg)](https://namespace.so/github-actions/?utm_source=oss&utm_campaign=papermc)
-
-[![YourKit-Logo](https://www.yourkit.com/images/yklogo.png)](https://www.yourkit.com/)
-
-[YourKit](https://www.yourkit.com/), makers of the outstanding java profiler, support open source projects of all kinds with their full featured [Java](https://www.yourkit.com/java/profiler) and [.NET](https://www.yourkit.com/.net/profiler) application profilers. We thank them for granting Paper an OSS license so that we can make our software the best it can be.
-
-All our sponsors!  
-[![Sponsor Image](https://raw.githubusercontent.com/PaperMC/papermc.io/data/sponsors.png)](https://papermc.io/sponsors)
+The fork inherits GPLv3 obligations; see `LICENSE.md`, `licenses/` and
+`THIRD_PARTY_NOTICES.md`. Native linkage/licensing, six platform runtime tests,
+full differential tests and statistically supported performance results are
+release gates. A compiled JAR is not a qualified release.

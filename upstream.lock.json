@@ -1,0 +1,55 @@
+{
+  "resolvedAtUtc": "2026-10-13T17:43:53.741415+00:00",
+  "minecraftVersion": "26.3",
+  "paperApiVersion": "26.3",
+  "paperBuild": "181",
+  "paperChannel": "STABLE",
+  "paperSourceCommit": "cc7ee9aebdfc9e4acc3ef8f38c35944872fd1f87",
+  "paperSourceUrl": "https://github.com/PaperMC/Paper",
+  "paperBuildApiUrl": "https://fill.papermc.io/v3/projects/paper/versions/26.3/builds/181",
+  "paperDownloadUrl": "https://fill-data.papermc.io/v1/objects/cada5af7f14363bc8545c0e973130de9431f6dc678dc612759187695027c27d9/paper-26.3-181.jar",
+  "paperDownloadSha256": "cada5af7f14363bc8545c0e973130de9431f6dc678dc612759187695027c27d9",
+  "jdkVersion": "25.0.4.1+1",
+  "jdk": {
+    "vendor": "Eclipse Temurin",
+    "version": "25.0.4.1+1",
+    "releaseUrl": "https://github.com/adoptium/temurin25-binaries/releases/tag/jdk-25.0.4.1%2B1",
+    "buildHost": "macos-aarch64",
+    "buildHostArchiveUrl": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.4.1%2B1/OpenJDK25U-jdk_aarch64_mac_hotspot_25.0.4.1_1.tar.gz",
+    "buildHostArchiveSha256": "61979887f7506a24a57439ff99adb8b3a7fc89977d9cfe3b8984f58a981b7b9d"
+  },
+  "gradleVersion": "9.8.0",
+  "gradleWrapperSha256": "238e777fcddd7e34f9708186085def2abd6e08e658505b38718d79d74c21abd5",
+  "upstreamFilesSha256": {
+    "build.gradle.kts": "d16b655d6a34404ce5e3bd2ddcddcaee44058ad5b72d0c8e6d0f959bc1b6009c",
+    "settings.gradle.kts": "77796d6434cee91729fa4e12ef7b26e3ff63bf257d2615aa0a4d0b9a45febf3d",
+    "gradle.properties": "4727557d166316185a22957753bfeb80f1a19e1c4a9a6e421e120ba49ff52362",
+    "paper-server/build.gradle.kts": "be3fcedb14affb677ebe9bfb98efc698a1fceaf2fed33b954a6056e776f5efdc",
+    "gradle/wrapper/gradle-wrapper.jar": "238e777fcddd7e34f9708186085def2abd6e08e658505b38718d79d74c21abd5",
+    "gradle/wrapper/gradle-wrapper.properties": "d3c8ac7b34869c3184b4c21374153af1ad72c69c1813e723e3cfc7995f3624bd"
+  },
+  "buildConditions": {
+    "engineMode": "JAVA_BASELINE",
+    "nativeEnabled": false,
+    "buildNumberOverride": null,
+    "javaRelease": 25,
+    "paperweightCore": "2.0.0-beta.24",
+    "mache": "26.3+build.1",
+    "paperclip": "3.0.4",
+    "remoteBuildCache": false
+  },
+  "nativeToolchain": {
+    "status": "NOT_QUALIFIED",
+    "cStandard": "C11",
+    "cmakeObserved": "4.4.3",
+    "platformMatrixStatus": "UNVERIFIED",
+    "compilerObserved": "AppleClang 21.0.0.21000101"
+  },
+  "verificationStatus": {
+    "downloadChecksums": "PASS",
+    "sourceCommit": "PASS",
+    "build": "PASS",
+    "launch": "PENDING",
+    "semanticSmoke": "PENDING"
+  }
+}

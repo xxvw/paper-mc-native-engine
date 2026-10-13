@@ -1,0 +1,13 @@
+{
+  "_notice": "EXAMPLE ONLY; not a verified stable version or pin; replace at kickoff",
+  "resolvedAtUtc": null,
+  "minecraftVersion": null,
+  "paperBuild": null,
+  "paperChannel": "STABLE",
+  "paperSourceCommit": null,
+  "paperSourceUrl": "https://github.com/PaperMC/Paper",
+  "paperDownloadUrl": null,
+  "paperDownloadSha256": null,
+  "jdkVersion": null,
+  "gradleWrapperSha256": null
+}
