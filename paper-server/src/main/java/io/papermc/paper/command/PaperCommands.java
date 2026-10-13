@@ -22,6 +22,7 @@ public final class PaperCommands {
     private static final Map<String, Command> COMMANDS = new HashMap<>();
 
     public static void registerCommands(final MinecraftServer server) {
+        io.github.xxvw.mcnativechunkengine.server.McneRuntime.initialize(); // MCNE - startup-only configuration
         COMMANDS.put("paper", new PaperCommand("paper"));
 
         COMMANDS.forEach((s, command) -> {
@@ -30,6 +31,7 @@ public final class PaperCommands {
     }
 
     public static void registerCommands() {
+        registerInternalCommand(io.github.xxvw.mcnativechunkengine.command.McneCommand.create(), "mcne", "Native chunk engine management", List.of(), Set.of()); // MCNE
         // Paper commands go here
         registerInternalCommand(PaperMSPTCommand.create(), "paper", PaperMSPTCommand.DESCRIPTION, List.of(), Set.of());
         registerInternalCommand(PaperVersionCommand.create(), "bukkit", PaperVersionCommand.DESCRIPTION, List.of("ver", "about"), Set.of());

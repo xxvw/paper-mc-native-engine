@@ -180,7 +180,7 @@ tasks.jar {
             "Specification-Version" to project.version,
             "Specification-Vendor" to "Paper Team",
             "Brand-Id" to "papermc:paper",
-            "Brand-Name" to "Paper",
+            "Brand-Name" to "paper-chunk-native-engine", // MCNE - display brand; keep Paper compatibility ID
             "Build-Number" to (build ?: ""),
             "Build-Time" to buildTime.toString(),
             "Git-Branch" to gitBranch,
@@ -268,7 +268,19 @@ sourceSets {
     main {
         java {
             srcDir(generatedDir)
+            srcDir(rootProject.file("mcne-common/src/main/java"))
+            srcDir(rootProject.file("mcne-server/src/main/java"))
         }
+    }
+    test {
+        java.srcDir(rootProject.file("mcne-server/src/test/java"))
+    }
+}
+
+// MCNE - embed the locked upstream provenance, independently of fork Git/build identity.
+tasks.processResources {
+    from(rootProject.file("upstream.lock.json")) {
+        rename { "mcne-upstream.json" }
     }
 }
 

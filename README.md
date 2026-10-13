@@ -7,13 +7,20 @@ Repository: https://github.com/xxvw/paper-mc-native-engine
 
 ## Current state
 
-Phase 0 local acceptance passed. The server source and generation logic are unchanged.
-There is no working native engine, custom branding or `/mcne` command yet.
-`JAVA_BASELINE` is the only runnable path. No performance improvement is claimed.
+Phase 0 local acceptance passed. Phase 1 adds `paper-chunk-native-engine`
+branding and permission-gated `/mcne help`, `/mcne status`, `/mcne native info`.
+Generation logic remains unchanged. `JAVA_BASELINE` is the only runnable path;
+an explicit native request reports its unavailability and retains baseline.
+No performance improvement is claimed. Benchmarks and metrics follow in Phase 2.
 
 The immutable baseline is recorded in `upstream.lock.json`. The inherited
 Paper build scripts, wrapper, patch workflow and licenses are preserved.
 Local requirement documents under `docs/` are deliberately not published.
+
+`config/mcne.yml` is read once at startup. Native defaults to disabled. Management
+permissions `mcne.admin`, `mcne.benchmark`, `mcne.metrics` default to operators;
+diagnostic commands have a per-sender one-second cooldown. Upstream Paper identity
+and Minecraft/build/source provenance remain available through `/version`.
 
 ## Reproduce the baseline build
 

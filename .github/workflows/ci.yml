@@ -37,6 +37,8 @@ jobs:
           git config --global user.email 'mcne-ci@users.noreply.github.com'
       - name: Apply maintained patches
         run: ./gradlew applyPatches
-      - name: Build unchanged fork
+      - name: Build maintained fork
         run: ./gradlew createPaperclipJar
+      - name: Verify MCNE command and configuration contracts
+        run: ./gradlew :paper-server:test --tests '*McneTestSuite'
       # No upstream publishing, binary release or equivalence assertion here.

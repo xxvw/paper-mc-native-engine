@@ -38,6 +38,14 @@ class BaselineVerificationTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "build file changed"):
             module.verify(self.lock, self.root)
 
+    def test_declared_fork_delta_preserves_original_pin(self):
+        (self.root / "wrapper").write_bytes(b"maintained")
+        self.lock["maintainedBuildFilesSha256"] = {"wrapper": hashlib.sha256(b"maintained").hexdigest()}
+        module.verify(self.lock, self.root)
+        self.lock["upstreamFilesSha256"]["wrapper"] = hashlib.sha256(b"maintained").hexdigest()
+        with self.assertRaisesRegex(ValueError, "Pinned upstream build file hash mismatch"):
+            module.verify(self.lock, self.root)
+
     def test_rejects_tracked_requirements(self):
         (self.root / "docs").mkdir()
         (self.root / "docs/requirements.md").write_text("local")

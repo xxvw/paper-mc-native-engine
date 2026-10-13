@@ -119,7 +119,7 @@ def first_difference(left, right, path="$"):
     return None
 
 
-def launch(java, jar, directory, seed):
+def launch(java, jar, directory, seed, fixture_plugin=None):
     directory.mkdir()
     (directory / ".mcne-managed.json").write_text(json.dumps({"purpose": "phase0-smoke", "seed": seed}))
     (directory / "eula.txt").write_text("eula=true\n")
@@ -138,6 +138,10 @@ def launch(java, jar, directory, seed):
     # for smoke fixtures; this is not representative performance evidence.
     (directory / "config/paper-global.yml").write_text(
         "_version: 31\nchunk-system:\n  worker-threads: 1\n  io-threads: 1\n")
+    if fixture_plugin is not None:
+        (directory / "plugins").mkdir()
+        (directory / "plugins/api-smoke.jar").write_bytes(fixture_plugin.read_bytes())
+        (directory / "config/mcne.yml").write_text("native:\n  enabled: true\n")
     process = subprocess.Popen([str(java), "-Xms1G", "-Xmx2G", "-jar", str(jar), "--nogui"],
                                cwd=directory, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                stderr=subprocess.STDOUT, text=True, bufsize=1)
@@ -176,6 +180,17 @@ def launch(java, jar, directory, seed):
         # Chunk workers and console commands keep running, while gameplay
         # block/fluid ticks must not mutate fixtures at different wall times.
         wait_for('Done (', 300)
+        if fixture_plugin is not None:
+            log = (directory / "console.log").read_text()
+            if "MCNE_API_SMOKE_PASS" not in log or "Native unavailable:" not in log:
+                raise RuntimeError("Plugin API or explicit-native fallback smoke failed")
+            for command, token in [("version", "This server is running paper-chunk-native-engine"),
+                                   ("ver", "This server is running paper-chunk-native-engine"),
+                                   ("mcne status", "mode=JAVA_BASELINE"),
+                                   ("mcne native info", "Native ABI/SIMD: unavailable")]:
+                send(command)
+                wait_for(token, 15)
+                time.sleep(1.1)
         send("tick freeze")
         wait_for("frozen", 10)
         for dimension in DIMENSIONS:

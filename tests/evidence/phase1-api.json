@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "forkSha256": "c0318d6e1d2f91c64d818015683103d13d21b2e764726ec27802138ce5095eb6",
+  "scope": "Disposable plugin API, console aliases and explicit-native fallback; not broad plugin certification"
+}

@@ -61,5 +61,8 @@
     "build": "PASS",
     "launch": "PASS",
     "semanticSmoke": "PASS"
+  },
+  "maintainedBuildFilesSha256": {
+    "paper-server/build.gradle.kts": "5efa9aff07c5177d34c64bea9c67916ceafb97e126153b6efcc68a6cc34496fb"
   }
 }

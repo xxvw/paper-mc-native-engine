@@ -6,10 +6,10 @@ Only executed evidence constitutes PASS. Pending entries block their phase/relea
 |---|---|---|---|
 | REQ-001 | 0 | `tests/phase0.md`; `tests/evidence/phase0.md` | PASS (local build) |
 | REQ-002 | 0 | `tests/phase0.md`; `tests/evidence/phase0.md` | PASS (unchanged fork) |
-| REQ-003 | 1 | Pending phase-specific automated tests and recorded evidence | PENDING |
+| REQ-003 | 1 | `tests/evidence/phase1.md`; unit, console, plugin API and user-confirmed direct client F3 | PASS (local) |
 | REQ-004 | 4 | Pending phase-specific automated tests and recorded evidence | PENDING |
 | REQ-005 | 3 | Pending phase-specific automated tests and recorded evidence | PENDING |
-| REQ-006 | 1 | Pending phase-specific automated tests and recorded evidence | PENDING |
+| REQ-006 | 1–2 | `tests/evidence/phase1.md`; permissions/help/status/native implemented; metrics/bench pending Phase 2 | PARTIAL |
 | BENCH-001 | 2 | Pending phase-specific automated tests and recorded evidence | PENDING |
 | BENCH-002 | 2 | Pending phase-specific automated tests and recorded evidence | PENDING |
 | BENCH-003 | 2 | Pending phase-specific automated tests and recorded evidence | PENDING |

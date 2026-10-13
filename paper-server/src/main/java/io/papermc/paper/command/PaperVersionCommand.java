@@ -167,6 +167,8 @@ public class PaperVersionCommand {
            final Component message = Component.textOfChildren(
                Component.text(Bukkit.getVersionMessage(), NamedTextColor.WHITE),
                Component.newline(),
+               Component.text(io.github.xxvw.mcnativechunkengine.brand.UpstreamProvenance.load().display(), NamedTextColor.GRAY), // MCNE - truthful baseline
+               Component.newline(),
                this.versionFetcher.getVersionMessage()
            );
 

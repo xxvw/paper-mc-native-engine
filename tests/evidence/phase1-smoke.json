@@ -1,0 +1,122 @@
+{
+  "status": "PASS",
+  "seed": 0,
+  "workset": [
+    [
+      0,
+      0
+    ],
+    [
+      -1,
+      -1
+    ],
+    [
+      1,
+      -1
+    ],
+    [
+      31,
+      31
+    ],
+    [
+      32,
+      32
+    ],
+    [
+      -32,
+      -32
+    ]
+  ],
+  "dimensions": [
+    "overworld",
+    "the_nether",
+    "the_end"
+  ],
+  "excludedChunkFields": [
+    "InhabitedTime",
+    "LastUpdate"
+  ],
+  "tickPolicy": "tick freeze before requesting fixtures; no gameplay steps",
+  "chunkWorkerThreads": 1,
+  "chunkIoThreads": 1,
+  "scope": "Persisted terrain smoke only; entities and live plugin/player behavior are Phase 3 gates",
+  "artifacts": {
+    "baseline": "cada5af7f14363bc8545c0e973130de9431f6dc678dc612759187695027c27d9",
+    "fork": "c0318d6e1d2f91c64d818015683103d13d21b2e764726ec27802138ce5095eb6"
+  },
+  "hashes": {
+    "overworld:0,0": {
+      "baseline": "d49c5ab4403c2ddea7ea3666a82097b190fc8f690bea4755631966301cdf87be",
+      "fork": "d49c5ab4403c2ddea7ea3666a82097b190fc8f690bea4755631966301cdf87be"
+    },
+    "overworld:-1,-1": {
+      "baseline": "291b0e584e9c4aea4737f52c638765565652a3252b57f63b91c2748c00a03584",
+      "fork": "291b0e584e9c4aea4737f52c638765565652a3252b57f63b91c2748c00a03584"
+    },
+    "overworld:1,-1": {
+      "baseline": "517ad1c99ddfb9ff0810f30961c711054fdb716c7c3bb35d8693485f79660f97",
+      "fork": "517ad1c99ddfb9ff0810f30961c711054fdb716c7c3bb35d8693485f79660f97"
+    },
+    "overworld:31,31": {
+      "baseline": "12015488e4e034b9828d4db14b9c528da72cbdb7c445c0bb07946c5fb1bbb019",
+      "fork": "12015488e4e034b9828d4db14b9c528da72cbdb7c445c0bb07946c5fb1bbb019"
+    },
+    "overworld:32,32": {
+      "baseline": "d47483a9dce06342e01c0e8ec7eb4ae21ac5d775742ef99af4bd249a977f22af",
+      "fork": "d47483a9dce06342e01c0e8ec7eb4ae21ac5d775742ef99af4bd249a977f22af"
+    },
+    "overworld:-32,-32": {
+      "baseline": "3179192826f414b22d6609179e0239cfbebc8b265ab89bdeef02e48832a9c1da",
+      "fork": "3179192826f414b22d6609179e0239cfbebc8b265ab89bdeef02e48832a9c1da"
+    },
+    "the_nether:0,0": {
+      "baseline": "5a7dc56ca0f27b99ca7d2efe3fd2ee1167e542e6e8f181b025c01a4f00e70af6",
+      "fork": "5a7dc56ca0f27b99ca7d2efe3fd2ee1167e542e6e8f181b025c01a4f00e70af6"
+    },
+    "the_nether:-1,-1": {
+      "baseline": "2527817e8f5813b071ae588def5210f4b65b4e050d064c14edd974e3518fc81d",
+      "fork": "2527817e8f5813b071ae588def5210f4b65b4e050d064c14edd974e3518fc81d"
+    },
+    "the_nether:1,-1": {
+      "baseline": "654137976659d905946d550fcfdf3741e1cfe8bec2a8240f401e1d47394edfa4",
+      "fork": "654137976659d905946d550fcfdf3741e1cfe8bec2a8240f401e1d47394edfa4"
+    },
+    "the_nether:31,31": {
+      "baseline": "54e5a70a2d30bd82125580bef6e33c21a22302182b613fddc16c81791ae213ed",
+      "fork": "54e5a70a2d30bd82125580bef6e33c21a22302182b613fddc16c81791ae213ed"
+    },
+    "the_nether:32,32": {
+      "baseline": "5ba7f2a995aeae72c69fc47f6621f250287ee6551b1572947a737bd23d25e0d4",
+      "fork": "5ba7f2a995aeae72c69fc47f6621f250287ee6551b1572947a737bd23d25e0d4"
+    },
+    "the_nether:-32,-32": {
+      "baseline": "3cb9987b9c8896e221a064128ae7edf58308ad20a08c3b22b3dbc0647da2782c",
+      "fork": "3cb9987b9c8896e221a064128ae7edf58308ad20a08c3b22b3dbc0647da2782c"
+    },
+    "the_end:0,0": {
+      "baseline": "4bc9dc0f57fd8e40ea76cc6b3d3a507c989b9781889092e1ecadbe1ca672f033",
+      "fork": "4bc9dc0f57fd8e40ea76cc6b3d3a507c989b9781889092e1ecadbe1ca672f033"
+    },
+    "the_end:-1,-1": {
+      "baseline": "d36377ce9972ad04dd81aaa3ef4a3ab9598809aa2c8b1a7a112860703b5102ce",
+      "fork": "d36377ce9972ad04dd81aaa3ef4a3ab9598809aa2c8b1a7a112860703b5102ce"
+    },
+    "the_end:1,-1": {
+      "baseline": "e23f3b841978c08ec6e20d9d5304a9aefadd5f9520deec04ddf290c3b63c13d9",
+      "fork": "e23f3b841978c08ec6e20d9d5304a9aefadd5f9520deec04ddf290c3b63c13d9"
+    },
+    "the_end:31,31": {
+      "baseline": "fedb7a8665398e758c54e931b1286e357326c552438a3072bf9b9c25cbc4cbc1",
+      "fork": "fedb7a8665398e758c54e931b1286e357326c552438a3072bf9b9c25cbc4cbc1"
+    },
+    "the_end:32,32": {
+      "baseline": "3aba4daf44620af21a5652e89f79f4839ed700fbfea81eda04cb8091680cd74a",
+      "fork": "3aba4daf44620af21a5652e89f79f4839ed700fbfea81eda04cb8091680cd74a"
+    },
+    "the_end:-32,-32": {
+      "baseline": "833b01e3258cf7826430aedb99b1419ff747ce15009e6c7278be5c75d254fed9",
+      "fork": "833b01e3258cf7826430aedb99b1419ff747ce15009e6c7278be5c75d254fed9"
+    }
+  },
+  "differences": []
+}

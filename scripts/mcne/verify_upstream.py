@@ -22,7 +22,11 @@ def verify(lock, root=ROOT, baseline=None, jdk_archive=None):
         raise ValueError("Expected full upstream source SHA")
     subprocess.run(["git", "merge-base", "--is-ancestor", commit, "HEAD"], cwd=root, check=True)
     for path, expected in lock["upstreamFilesSha256"].items():
-        if digest(root / path) != expected:
+        upstream = subprocess.check_output(["git", "show", f"{commit}:{path}"], cwd=root)
+        if hashlib.sha256(upstream).hexdigest() != expected:
+            raise ValueError(f"Pinned upstream build file hash mismatch: {path}")
+        maintained = lock.get("maintainedBuildFilesSha256", {}).get(path, expected)
+        if digest(root / path) != maintained:
             raise ValueError(f"Upstream build file changed: {path}")
     paths = subprocess.check_output(["git", "ls-files", "-z"], cwd=root).decode().split("\0")
     if any(path.startswith("docs/") for path in paths):
