@@ -37,3 +37,12 @@
          if (!validationResults.isEmpty()) {
              throw new ContentValidationException(levelPath, validationResults);
          } else {
+@@ -518,7 +_,7 @@
+         }
+ 
+         public Path getDimensionPath(final ResourceKey<Level> name) {
+-            return DimensionType.getStorageFolder(name, this.levelDirectory.path());
++            return io.github.xxvw.mcnativechunkengine.benchmark.ManagedStorage.resolve(name.identifier().toString(), DimensionType.getStorageFolder(name, this.levelDirectory.path())); // MCNE - explicit benchmark storage lease only
+         }
+ 
+         private void checkLock() {
